@@ -2,7 +2,9 @@ const fs = require("fs")
 const express = require("express")
 const router = express()
 
+// Helpers
 const UserHelpers = require("../helpers/user-helpers")
+const MSG = require("../helpers/messaging")
 
 // Get existing userSelect: 
 router.get('/:userid', (req, res) => {
@@ -13,19 +15,9 @@ router.get('/:userid', (req, res) => {
         const [user] = JSON.parse(fs.readFileSync('./data/users.json', "utf-8")).filter(user => user.username === userid.toLowerCase())
         console.log(user)
         // If user found
-        if(user) {
-            return res.json({
-                success: true,
-                message: "User found",
-                user
-            })
-        }
+        if(user) return res.json(MSG.generateApiResponse("User found", user))
     }
-    return res.json({
-        success: false,
-        message: "User not found",
-        errorCode: "DATA_NOT_FOUND"
-    })
+    return res.json(MSG.generateErrorResponse("User not found", "DATA_NOT_FOUND"))
 })
 
 // Create new user
@@ -54,22 +46,14 @@ router.post('/create', (req, res) => {
     // If the user exists throw error
     if(usernames.includes(username.toLowerCase())) {
         // Generate response
-        return res.json({
-            success: false,
-            message: "User Exists",
-            errorCode: "DATA_NOT_UNIQUE"
-        })
+        return res.json(MSG.generateErrorResponse("User Exists", "DATA_NOT_UNIQUE"))
     }
     // Add the user to the file - if the username is unique
     userData.push(user)
     fs.writeFileSync('./data/users.json', JSON.stringify(userData), "utf-8")
 
     // Generate response
-    return res.json({
-        success: true,
-        message: "Your user was added",
-        user
-    })
+    return res.json(MSG.generateApiResponse("Your user was added", user))
 });
 
 router.post("/subscribe/:subscriber/:account", (req, res) => {
@@ -78,13 +62,7 @@ router.post("/subscribe/:subscriber/:account", (req, res) => {
     account = account.toLowerCase()
 
     // If the subscriber and account dont exist throw error;
-    if(!subscriber || !account) {
-        return res.json({
-            success: false,
-            message: "could not subscribe",
-            errorCode: "ARGS_MISSING_PARAMETERS"
-        })
-    }
+    if(!subscriber || !account) return res.json(MSG.generateErrorResponse("could not subscribe", "ARGS_MISSING_PARAMETERS"))
 
     // Read user data for both user
     const userData = JSON.parse(fs.readFileSync('./data/users.json'))
@@ -98,25 +76,13 @@ router.post("/subscribe/:subscriber/:account", (req, res) => {
     const accountIndex = users.map(user => user.username).indexOf(account)
 
     // If subscriber or user not found, throw error 
-    if(!accountData || !subscriberData) {
-        return res.json({
-            success: false,
-            message: "could not subscribe",
-            errorCode: "DATA_NOT_FOUND"
-        })
-    }
+    if(!accountData || !subscriberData) return res.json(MSG.generateErrorResponse("could not subscribe", "DATA_NOT_FOUND"))
 
     // If all the users exist then add data to related data
     // Add subscriber to account's followers
     if(Array.isArray(accountData.followers)) {
        // Check if the subscriber s already subscribed
-       if(accountData.followers.includes(subscriber)) {
-        return res.json({
-            success: false,
-            message: "could not subscribe",
-            errorCode: "DATA_REDUNDANT_ACCOUNT_ALREADY_FOLLOWED"
-        })
-       }
+       if(accountData.followers.includes(subscriber)) return res.json(MSG.generateErrorResponse("could not subscribe", "DATA_REDUNDANT_ACCOUNT_ALREADY_FOLLOWED"))
        // Add the subscriber to the accounts followers
        accountData.followers.push(subscriber)
        // Add the account to the user's following list
@@ -131,10 +97,7 @@ router.post("/subscribe/:subscriber/:account", (req, res) => {
 
        fs.writeFileSync("./data/users.json", JSON.stringify(users), "utf-8")
 
-        return res.json({
-            success: true,
-            message: "Subscribed successfully"        
-        })
+       return res.json(MSG.generateApiResponse("Subscribed successfully"))
     } else {
        // Add the subscriber to the accounts followers
        accountData.followers = [subscriber]
@@ -146,11 +109,7 @@ router.post("/subscribe/:subscriber/:account", (req, res) => {
        users[accountIndex] = accountData;
 
        fs.writeFileSync("./data/users.json", JSON.stringify(users), "utf-8")
-
-        return res.json({
-            success: true,
-            message: "Subscribed successfully"        
-        })
+       return res.json(MSG.generateApiResponse("Subscribed successfully"))
     }
 })
 
@@ -158,13 +117,7 @@ router.post('/unsubscribe/:subscriber/:account', (req, res) => {
     let { subscriber, account } = req.params
 
     // If the subscriber and account dont exist throw error;
-    if(!subscriber || !account) {
-        return res.json({
-            success: false,
-            message: "could not subscribe",
-            errorCode: "ARGS_MISSING_PARAMETERS"
-        })
-    }
+    if(!subscriber || !account) return res.json(MSG.generateErrorResponse("could not subscribe", "ARGS_MISSING_PARAMETERS"))
 
     // Read user data for both user
     const userData = JSON.parse(fs.readFileSync('./data/users.json'))
@@ -178,24 +131,12 @@ router.post('/unsubscribe/:subscriber/:account', (req, res) => {
     const accountIndex = users.map(user => user.username).indexOf(account)
 
     // If subscriber or user not found, throw error 
-    if(!accountData || !subscriberData) {
-        return res.json({
-            success: false,
-            message: "could not subscribe",
-            errorCode: "DATA_NOT_FOUND"
-        })
-    }
+    if(!accountData || !subscriberData) return res.json(MSG.generateErrorResponse("could not subscribe", "DATA_NOT_FOUND"))
 
     // Check if the subscriber is on the followers list of account
     const subscriberFollowIndex = accountData.followers.indexOf(subscriber) != -1? accountData.followers.indexOf(subscriber) : null
     const accountFollowingIndex = subscriberData.following.indexOf(account) != -1? subscriberData.following.indexOf(account): null
-    if(subscriberFollowIndex === null) {
-        return res.json({
-            success: false,
-            message: "User not subscribed",
-            errorCode: "LOGIC_ERROR_USER_NOT_SUBSCRIBED"
-        })
-    }
+    if(subscriberFollowIndex === null) return res.json(MSG.generateErrorResponse("User not subscribed", "LOGIC_ERROR_USER_NOT_SUBSCRIBED"))
 
     // Here we can asume that the user is subscribed and remove them
     accountData.followers.splice(subscriberFollowIndex, 1)
@@ -211,10 +152,7 @@ router.post('/unsubscribe/:subscriber/:account', (req, res) => {
 
     fs.writeFileSync("./data/users.json", JSON.stringify(userData), "utf-8")
 
-    return res.json({
-        success: true,
-        message: "Successfully unsubscribed"
-    })
+    return res.json(MSG.generateApiResponse("Successfully unsubscribed"))
 })
 
 // Get list of people a particular user is following
@@ -226,22 +164,12 @@ router.get("/following/:userid", (req, res) => {
     const [userData] = JSON.parse(fs.readFileSync("./data/users.json", "utf-8")).filter(user => user.username === username)
 
     // If user doesn't exist throw api error 
-    if(!userData) {
-        return res.json({
-            success: false,
-            message: "User not found",
-            errorCode: "DATA_NOT_FOUND"
-        })
-    }
+    if(!userData) return res.json("User not found", "DATA_NOT_FOUND")
 
     // If we get to this point we ave a user - isolate user following list
-    const userFollowingList = Array.isArray(userData.following)? userData.following: []
+    const following = Array.isArray(userData.following)? userData.following: []
 
-    return res.json({
-        success: true,
-        message: "User found",
-        following: userFollowingList
-    })
+    return res.json(MSG.generateApiResponse("User found", following))
 })
 
 // Get list of people a particular user is followedBy
@@ -253,30 +181,12 @@ router.get("/followers/:userid", (req, res) => {
     const [userData] = JSON.parse(fs.readFileSync("./data/users.json", "utf-8")).filter(user => user.username === username)
 
     // If user doesn't exist throw api error 
-    if(!userData) {
-        return res.json({
-            success: false,
-            message: "User not found",
-            errorCode: "DATA_NOT_FOUND"
-        })
-    }
+    if(!userData) return res.json(MSG.generateErrorResponse("User not found", "DATA_NOT_FOUND"))
 
     // If we get to this point we ave a user - isolate user following list
-    const userFollowerList = Array.isArray(userData.followers)? userData.followers: []
+    const following = Array.isArray(userData.followers)? userData.followers: []
 
-    return res.json({
-        success: true,
-        message: "User found",
-        following: userFollowerList
-    })
+    return res.json(SMG.generateApiResponse("User found"), following)
 })
-
-
-/*
-TODOS
-1. Refactor with the new MSG helpers
-2. Modufy the user creating to add following and followers list to optimize and refactor the user routes with less edge cases
-
-*/
 
 module.exports = router

@@ -94,9 +94,7 @@ router.post("/like/:tweetid/:userid", (req, res) => {
     const [tweet] = tweets.filter(tweet => tweet.id === id)
 
     // Assuming the user exists - add user to likedBy - if they're not aready in there
-    if(!tweet.likedBy.includes(username)) { 
-        tweet.likedBy.push(username)
-    }
+    if(!tweet.likedBy.includes(username)) tweet.likedBy.push(username)
 
     // Copy local chages to global data 
     tweets[tweetIndex] = tweet
