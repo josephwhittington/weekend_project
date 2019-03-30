@@ -16,13 +16,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Reset data on start
 // Comment out to persist data
 // APP WLL NOT WORK IF THIS CODE IS UNCOMMENTED AND NODEMON IS RUNNING
-const init_data = JSON.parse(fs.readFileSync("./data/users.json", "utf-8"));
-if(typeof init_data == "object" && init_data.length !== 0) {
-    fs.writeFileSync("./data/users.json", JSON.stringify([]), "utf-8")
-}
+// const init_data = JSON.parse(fs.readFileSync("./data/users.json", "utf-8"));
+// if(typeof init_data == "object" && init_data.length !== 0) {
+//     fs.writeFileSync("./data/users.json", JSON.stringify([]), "utf-8")
+// }
 
 // Create new user
-app.post('/user', (req, res) => {
+app.post('/user/create', (req, res) => {
     // Assign the body vars to easier-to-use names
     let {username, displayName, password} = req.body
 
