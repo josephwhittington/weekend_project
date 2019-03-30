@@ -3,8 +3,8 @@ user {
     displayName: String!
     password: String!
     membershipDate: datetime! generated
-    followers: [User!]!
-    followedBy: [Users!]!
+    followers: [Username!]!
+    following: [Username!]!
 }
 
 Auth {
