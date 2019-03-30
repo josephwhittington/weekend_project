@@ -272,4 +272,11 @@ router.get("/followers/:userid", (req, res) => {
 })
 
 
+/*
+TODOS
+1. Refactor with the new MSG helpers
+2. Modufy the user creating to add following and followers list to optimize and refactor the user routes with less edge cases
+
+*/
+
 module.exports = router

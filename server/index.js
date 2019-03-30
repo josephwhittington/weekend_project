@@ -1,11 +1,16 @@
 const fs = require("fs");
+const path = require("path")
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 
+// Set up express to serve images folder statically
+app.use(express.static(path.join(__dirname, "data/files")))
+
 // Routers
 const AuthRoute = require('./routes/authroute')
 const UserRoute = require('./routes/userroute.js')
+const TweetRouter = require('./routes/tweet')
 
 // Import helpers
 const UserHelpers = require('./helpers/user-helpers')
@@ -27,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use('/auth', AuthRoute)
 app.use('/user', UserRoute)
-
+app.use('/tweet', TweetRouter)
 
 // Sample Protected route
 app.get('/protected', authenticateRoute, (req, res) => {

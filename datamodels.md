@@ -15,20 +15,22 @@ Auth {
 }
 
 Tweet/ text/ code {
-    user: User!
+    id: uuid!
+    username: Username!
     body: String!
-    timestamp: Date!
-    likedBy: [User!]!
-    comments: [Tweets!]!
+    timestamp: Date! generated
+    likedBy: [Username]! generated
+    comments: [Tweets!]! generated
 }
 
 Tweet/ media {
-    user: User!
+    id: uuid! generated
+    username: Username!
     body: String!
-    media: multipart/formdata!
-    timestamp: Date!
-    likedBy: [User!]!
-    comments: [Tweets!]!
+    media: urlstring! generated
+    timestamp: Date! generated
+    likedBy: [Usernames]! generated
+    comments: [Tweets!]! generated
 }
 
 route data expected

@@ -19,6 +19,7 @@ A twitter-lie microblogging serivice designed for developers to share and discus
     -   Geotagging
     -   Account Details
     -   Similar tweets
+    -   Some additional dev-related feature
 - Feed
 - Tweet details
     -   Look into how this should be implemented

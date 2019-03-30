@@ -20,8 +20,6 @@
 
 ## Tweet
 
--   POST /tweet/code
-    -   Might be the same route as /tweet/text
 -   POST /tweet/text
     -   Regular tweets/ maybe links
 -   POST /tweet/media
@@ -30,13 +28,13 @@
     -   Gets specific tweet and associated thread
 -   POST tweet/:tweetid/comment
     -   Adds comment to specific tweet
--   GET /tweet/:tweetid/code
-    -   Might be the same route as /tweet/:tweetid/text
 -   GET /tweet/:tweetid/text
     -   Gets tweet
 -   GET /tweet/:tweetid/media
     -   Gets media file
 -   POST /tweet/like/:tweetid/:userid
+    -   Gets Tweet
+-   POST /tweet/unlike/:tweetid/:userid
     -   Gets Tweet
 
 ## Feed
