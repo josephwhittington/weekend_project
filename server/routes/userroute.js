@@ -26,7 +26,7 @@ router.post('/create', (req, res) => {
     let {username, displayName, password} = req.body
 
     // Convert username to lowercase
-    username = username.toLowerCase();
+    username = username? username.toLowerCase(): null;
 
     // Generate user object
     const user = {
@@ -158,7 +158,7 @@ router.post('/unsubscribe/:subscriber/:account', (req, res) => {
 // Get list of people a particular user is following
 router.get("/following/:userid", (req, res) => {
     let { userid: username } = req.params
-    username = username.toLowerCase()
+    username = username? username.toLowerCase(): null;
     
     // Pull in the user data and filter to the user
     const [userData] = JSON.parse(fs.readFileSync("./data/users.json", "utf-8")).filter(user => user.username === username)
@@ -175,7 +175,7 @@ router.get("/following/:userid", (req, res) => {
 // Get list of people a particular user is followedBy
 router.get("/followers/:userid", (req, res) => {
     let { userid: username } = req.params
-    username = username.toLowerCase()
+    username = username? username.toLowerCase(): null;
     
     // Pull in the user data and filter to the user
     const [userData] = JSON.parse(fs.readFileSync("./data/users.json", "utf-8")).filter(user => user.username === username)

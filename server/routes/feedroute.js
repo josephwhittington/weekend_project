@@ -8,7 +8,7 @@ const MSG = require("../helpers/messaging")
 // Get the first 100 tweets from a user's feed
 router.get('/:userid', (req, res) => {
     let {userid: username} = req.params
-    username = username.toLowerCase()
+    username = typeof username === "string"? username.toLowerCase() : null
 
     // Find all the people who the person is subscribed to and aggregate all their tweets
     const tweets = JSON.parse(fs.readFileSync("./data/tweets.json", "utf-8"))

@@ -80,7 +80,7 @@ router.get("/:tweetid", (req, res) => {
 // Like a tweet
 router.post("/like/:tweetid/:userid", (req, res) => {
     let { tweetid: id, userid: username } = req.params
-    username = username.toLowerCase()
+    username = username? username.toLowerCase(): null;
 
     // If for some reason we're missing params throw an error 
     if(!id || !username) return res.json(MSG.generateErrorResponse("Missing params", "DATA_MISSING_PARAMS"))
@@ -108,7 +108,7 @@ router.post("/like/:tweetid/:userid", (req, res) => {
 // Unlike a tweet
 router.post('/unlike/:tweetid/:userid', (req, res) => {
     let {tweetid: id, userid: username } = req.params
-    username = username.toLowerCase()
+    username = username? username.toLowerCase(): null;
 
     // If for some reason we're missing params throw an error 
     if(!id || !username) return res.json(MSG.generateErrorResponse("Missing params", "DATA_MISSING_PARAMS"))
