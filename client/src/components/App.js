@@ -5,6 +5,9 @@ import Login from './Login';
 import Register from './Register';
 import Feed from './Feed';
 
+import Navbar from "react-bootstrap/Navbar"
+import Nav from "react-bootstrap/Nav"
+
 class App extends Component {
   logOut() {
     localStorage.removeItem('user');
@@ -14,20 +17,15 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <header className='App-header'>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-        </header>
-        <div id='navbar'>
-          <Link to='/'>Home</Link>
-          <Link to='/login'>Login</Link>
-          <Link to='/register'>Register</Link>
-          {localStorage.getItem('token') && <Link to='/feed'>Feed</Link>}
+        <Navbar bg="dark">
+          <Nav.Link><Link to='/'>Home</Link></Nav.Link>
+          <Nav.Link><Link to='/login'>Login</Link></Nav.Link>
+          <Nav.Link><Link to='/register'>Register</Link></Nav.Link>
+          {localStorage.getItem('token') && <Nav.Link><Link to='/feed'>Feed</Link></Nav.Link>}
           <button type='button' onClick={this.logOut}>
             Log Out
           </button>
-        </div>
+        </Navbar>
         <div id='main-section'>
           <Route exact path='/' component={Home} />
           <Route exact path='/login' component={Login} />
