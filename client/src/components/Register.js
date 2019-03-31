@@ -6,7 +6,8 @@ export default class Register extends Component {
     super();
     this.state = {
       displayName: '',
-      password: ''
+      password: '',
+      username: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -23,12 +24,14 @@ export default class Register extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const { displayName, password } = this.state;
+    const { displayName, password, username } = this.state;
     console.log(this.state, ' is state');
-    Axios.post('/auth').then(data => console.log(data));
+    const body = { displayName, password, username };
+    Axios.post('/user/create', body).then(data => console.log(data));
     this.setState({
       displayName: '',
-      password: ''
+      password: '',
+      username: ''
     });
   }
   render() {
@@ -42,6 +45,15 @@ export default class Register extends Component {
               type='text'
               name='displayName'
               value={this.state.displayName}
+              onChange={this.handleChange}
+            />
+          </label>
+          <label>
+            Username:
+            <input
+              type='text'
+              name='username'
+              value={this.state.username}
               onChange={this.handleChange}
             />
           </label>
