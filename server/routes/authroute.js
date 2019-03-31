@@ -8,8 +8,6 @@ const UserHelpers = require('../helpers/user-helpers');
 
 // Authenticate user
 router.post('/', (req, res) => {
-  console.log('api got hit');
-  console.log(req.body, ' is body');
   let { username, password } = req.body;
 
   // Translate the username to lowercase

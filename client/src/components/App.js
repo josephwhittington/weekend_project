@@ -3,8 +3,14 @@ import { Route, Link } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
+import Feed from './Feed';
 
 class App extends Component {
+  logOut() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
+
   render() {
     return (
       <div className='App'>
@@ -17,13 +23,16 @@ class App extends Component {
           <Link to='/'>Home</Link>
           <Link to='/login'>Login</Link>
           <Link to='/register'>Register</Link>
-          <Link />
+          {localStorage.getItem('token') && <Link to='/feed'>Feed</Link>}
+          <button type='button' onClick={this.logOut}>
+            Log Out
+          </button>
         </div>
         <div id='main-section'>
           <Route exact path='/' component={Home} />
           <Route exact path='/login' component={Login} />
           <Route path='/register' component={Register} />
-          <Route path='' />
+          <Route path='/feed' component={Feed} />
         </div>
       </div>
     );

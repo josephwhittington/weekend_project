@@ -26,7 +26,6 @@ router.get('/:userid', (req, res) => {
 // Create new user
 router.post('/create', (req, res) => {
   // Assign the body vars to easier-to-use names
-  console.log(req.body);
   let { username, displayName, password } = req.body;
 
   // Convert username to lowercase
