@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Axios from '../utils/axios';
 
 export default class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       password: '',
       username: ''
@@ -28,6 +28,7 @@ export default class Login extends Component {
           if (data.data.user.hasOwnProperty('authToken')) {
             localStorage.setItem('token', data.data.user.authToken);
             localStorage.setItem('user', username);
+            this.props.history.push('/feed');
           }
         }
       }
