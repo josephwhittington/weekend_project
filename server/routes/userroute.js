@@ -15,7 +15,6 @@ router.get('/:userid', (req, res) => {
     const [user] = JSON.parse(
       fs.readFileSync('./data/users.json', 'utf-8')
     ).filter(user => user.username === userid.toLowerCase());
-    console.log(user);
     // If user found
     if (user) return res.json(MSG.generateApiResponse('User found', user));
   }
@@ -27,7 +26,7 @@ router.get('/:userid', (req, res) => {
 // Create new user
 router.post('/create', (req, res) => {
   // Assign the body vars to easier-to-use names
-  console.log(req.body, ' is body');
+  console.log(req.body);
   let { username, displayName, password } = req.body;
 
   // Convert username to lowercase

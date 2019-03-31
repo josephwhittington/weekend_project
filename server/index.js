@@ -6,10 +6,11 @@ const express = require('express');
 const app = express();
 
 // Set up express to serve images folder statically
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'data/files')));
 app.use(cors());
 // Link up third-party middleware
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routers
 const AuthRoute = require('./routes/authroute');
