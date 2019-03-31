@@ -28,6 +28,8 @@ router.post('/create', (req, res) => {
     // Convert username to lowercase
     username = username? username.toLowerCase(): null;
 
+    if(!username || !displayName || !password) res.json(MSG.generateErrorResponse("Missing Params", "DATA_MISSING_PARAMS"))
+
     // Generate user object
     const user = {
         username,
