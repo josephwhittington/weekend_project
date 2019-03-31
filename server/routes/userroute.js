@@ -44,7 +44,7 @@ router.post('/create', (req, res) => {
     // Create array of just usernames to save memory
     const usernames = UserHelpers.getUsernames(userData);
     // If the user exists throw error
-    if(usernames.includes(username.toLowerCase())) {
+    if(usernames.includes(username)) {
         // Generate response
         return res.json(MSG.generateErrorResponse("User Exists", "DATA_NOT_UNIQUE"))
     }
