@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
   let { username, password } = req.body;
 
   // Translate the username to lowercase
-  username = username.toLowerCase();
+  username = typeof username === "string"? username.toLowerCase(): null;
 
   // Check if the user exists
   const userData = JSON.parse(fs.readFileSync('./data/users.json', 'utf-8'));

@@ -1,11 +1,13 @@
 const fs = require("fs");
 const path = require("path")
+const cors = require("cors")
 const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 
 // Set up express to serve images folder statically
 app.use(express.static(path.join(__dirname, "data/files")))
+app.use(cors())
 
 // Routers
 const AuthRoute = require('./routes/authroute')
