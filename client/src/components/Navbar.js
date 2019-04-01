@@ -11,7 +11,7 @@ export default class NavbarCustom extends Component {
   logOut() {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    this.props.history.push('/');
+    this.props.history.push('/home');
   }
   render() {
     return (

@@ -19,7 +19,7 @@ export default class Login extends Component {
     const { name, value } = e.target;
     this.setState(() => ({
       [name]: value
-    }));
+    }), console.log(this.state));
   }
   handleSubmit(e) {
     e.preventDefault();

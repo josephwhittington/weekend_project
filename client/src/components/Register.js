@@ -10,6 +10,7 @@ export default class Register extends Component {
     this.state = {
       displayName: '',
       password: '',
+      password2: '',
       username: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -71,6 +72,19 @@ export default class Register extends Component {
                 name='password'
                 value={this.state.password}
                 onChange={this.handleChange}
+                isValid={this.state.password === this.state.password2 && this.state.password !== ""}
+                isInvalid={this.state.password !== this.state.password2}
+              />
+            </Form.Group>
+            <Form.Group>
+              <label>Verify Password: </label>
+              <Form.Control
+                type='text'
+                name='password2'
+                value={this.state.password2}
+                onChange={this.handleChange}
+                isValid={this.state.password === this.state.password2 && this.state.password !== ""}
+                isInvalid={this.state.password !== this.state.password2}
               />
             </Form.Group>
             <Button type='submit' variant="outline-success" block>Submit</Button>
