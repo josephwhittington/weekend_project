@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Axios from '../utils/axios';
 
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -42,28 +45,28 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <h1>Made it to the Login Page</h1>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Username:
-            <input
+        <h1 className="py-5 text-center">Login To Dev Shout!!</h1>
+        <Form className="w-50 mx-auto" onSubmit={this.handleSubmit}>
+          <Form.Group>
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
               type='text'
               name='username'
               value={this.state.username}
               onChange={this.handleChange}
             />
-          </label>
-          <label>
-            Password:
-            <input
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
               type='text'
               name='password'
               value={this.state.password}
               onChange={this.handleChange}
             />
-          </label>
-          <button type='submit'>Submit</button>
-        </form>
+          </Form.Group>
+          <Button type='submit' variant="outline-success" block>Submit</Button>
+        </Form>
       </div>
     );
   }

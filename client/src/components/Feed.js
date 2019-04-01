@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from '../utils/axios';
 import TweetEditor from './TweetEditor';
+import Tweet from './Tweet'
 
 export default class Feed extends Component {
   constructor(props) {
@@ -27,11 +28,11 @@ export default class Feed extends Component {
     const tweets = this.state.tweets;
 
     return (
-      <div>
+      <div className="mt-2">
         <TweetEditor />
-        <ul>
-          {tweets && tweets.map(tweet => <li key={tweet.id}>{tweet.body}</li>)}
-        </ul>
+        <div className="mt-3">
+          {tweets && tweets.map(tweet => <Tweet key={tweet.id} props={tweet}>{tweet.body}</Tweet>)}
+        </div>
       </div>
     );
   }

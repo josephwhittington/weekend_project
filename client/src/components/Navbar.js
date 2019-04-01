@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
+
+import Navbar from 'react-bootstrap/Navbar';
 
 export default class NavbarCustom extends Component {
   constructor(props) {
@@ -17,24 +17,17 @@ export default class NavbarCustom extends Component {
     return (
       <div>
         <Navbar bg='dark'>
-          <Nav.Link>
-            <Link to='/'>Home</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to='/login'>Login</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to='/register'>Register</Link>
-          </Nav.Link>
+            <Link className="p-2 text-light" to='/home'>Home</Link>
+            {!localStorage.getItem("token") && <Link className="p-2 text-light" to='/register'>Register</Link>}
+            {!localStorage.getItem("token") && <Link className="p-2 text-success" to='/login'>Login</Link>}
           {localStorage.getItem('token') && (
-            <Nav.Link>
-              <Link to='/feed'>Feed</Link>
-            </Nav.Link>
+              <Link className="p-2 text-light" to='/feed'>Feed</Link>
           )}
+          {localStorage.getItem('user') && <Link className="p-2 text-primary" to={`/user/${localStorage.getItem('user')}`}>Account</Link>}
           {localStorage.getItem('token') && (
-            <button type='button' onClick={this.logOut}>
+            <span className="p-2 text-danger" onClick={this.logOut} style={{cursor: "pointer"}}>
               Log Out
-            </button>
+            </span>
           )}
         </Navbar>
       </div>

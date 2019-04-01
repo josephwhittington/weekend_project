@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
 import Axios from '../utils/axios';
+
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button';
 
 export default class TweetEditor extends Component {
   constructor() {
@@ -32,25 +34,21 @@ export default class TweetEditor extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <h3>New Tweet</h3>
-          </label>
-          <br />
-          <label>
-            <textarea
+        <Form className="w-50 mx-auto" onSubmit={this.handleSubmit}>
+            <h3 className="text-center">New Tweet</h3>
+            <Form.Control
+              as="textarea"
               rows='2'
               cols='45'
               style={{ resize: 'none' }}
               value={this.state.body}
               onChange={this.handleChange}
             />
-          </label>
           <br />
-          <Button variant='outline-success' type='submit'>
+          <Button variant='outline-success' type='submit' block>
             Send
           </Button>
-        </form>
+        </Form>
       </div>
     );
   }

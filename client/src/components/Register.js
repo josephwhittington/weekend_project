@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Axios from '../utils/axios';
 
+import Form from "react-bootstrap/Form"
+import Button from 'react-bootstrap/Button'
+
 export default class Register extends Component {
   constructor() {
     super();
@@ -37,37 +40,41 @@ export default class Register extends Component {
   render() {
     return (
       <div>
-        <h1>Made it to the Register Page</h1>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Display Name:
-            <input
-              type='text'
-              name='displayName'
-              value={this.state.displayName}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            Username:
-            <input
-              type='text'
-              name='username'
-              value={this.state.username}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            Password:
-            <input
-              type='text'
-              name='password'
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </label>
-          <button type='submit'>Submit</button>
-        </form>
+        <h1 className="py-5 text-center">Register for Dev Shout!!</h1>
+        <Form className="w-50 mx-auto" onSubmit={this.handleSubmit}>
+            <Form.Group>
+              <Form.Label>Display Name: <br/></Form.Label>
+              <Form.Control
+                type='text'
+                name='displayName'
+                value={this.state.displayName}
+                onChange={this.handleChange}
+              />
+              <Form.Text className="text-muted">
+                This will show up on your tweets - unlike your username, this can be changed
+              </Form.Text>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label> Username: </Form.Label>
+              <Form.Control
+                type='text'
+                name='username'
+                value={this.state.username}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <label>Password: </label>
+              <Form.Control
+                type='text'
+                name='password'
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Button type='submit' variant="outline-success" block>Submit</Button>
+        </Form>
       </div>
     );
   }

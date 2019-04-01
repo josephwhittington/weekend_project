@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Axios from '../utils/axios';
 
+import Tweet from "./Tweet"
+
 export default class UserHome extends Component {
   constructor(props) {
     super(props);
@@ -20,10 +22,10 @@ export default class UserHome extends Component {
     const { tweets } = this.state;
     return (
       <div>
-        <h1>{localStorage.getItem('user')}'s Tweets</h1>
+        <h3 className="my-3 text-center">{userid}'s Tweets</h3>
         <ul>
           {tweets.map(tweet => (
-            <li key={tweet.id}>{tweet.body}</li>
+            <Tweet key={tweet.id} props={tweet}/>
           ))}
         </ul>
       </div>
