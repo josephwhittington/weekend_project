@@ -40,7 +40,6 @@ router.get('/history/:userid', (req, res) => {
 
 // Post text tweet
 router.post('/text', (req, res) => {
-  console.log(req.body);
   let { body, username } = req.body;
   username = username ? username.toLowerCase() : null;
 
