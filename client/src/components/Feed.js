@@ -31,7 +31,7 @@ export default class Feed extends Component {
         const tweets = this.state.tweets;
 
         return (
-            <div className="mt-2">
+            <div>
                 <Navbar push={this.props.history.push} />
                 <TweetEditor />
                 <div className="mt-3">
