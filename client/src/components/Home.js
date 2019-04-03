@@ -11,7 +11,7 @@ export default class Home extends Component {
         return (
             <div>
                 <Navbar push={this.props.history.push} />
-                <Jumbotron className="mt-3">
+                <Jumbotron>
                     <h1>Dev Shout!!</h1>
                     <p>
                         Dev Shout is the first microblogging service built just
