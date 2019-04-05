@@ -14,7 +14,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "data/files")));
 app.use(cors());
-// Link up third-party middleware
 
 // Routers
 const AuthRoute = require("./routes/authroute");

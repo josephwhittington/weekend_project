@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
 
 const setBaseURL = () =>
     process.env.NODE_ENV === "development"
@@ -18,10 +19,27 @@ export default class Tweet extends Component {
             media = `${setBaseURL()}/${media.split("\\")[2]}`;
         return (
             <Card className="my-3 w-50 mx-auto">
-                <Card.Header className="bg-light">
-                    <Link className="text-dark" to={`/user/${username}`}>
-                        @{username}
+                <Card.Header className="bg-white border-bottom-0">
+                    <span
+                        style={{
+                            height: 20,
+                            width: 20,
+                            backgroundColor: "black"
+                        }}
+                        className="d-inline-block my-auto rounded-circle mr-2"
+                    />
+                    <Link
+                        className="d-inline-block text-dark my-auto"
+                        to={`/user/${username}`}
+                    >
+                        <span className="pr-3">
+                            <Badge variant="secondary">@{username}</Badge>
+                        </span>
                     </Link>
+                    <br />
+                    <small>
+                        On {localdate} @{localtime}
+                    </small>
                 </Card.Header>
                 <Card.Body>
                     {media && (
@@ -33,13 +51,10 @@ export default class Tweet extends Component {
                     )}
                     <Card.Text className="text-dark">{body}</Card.Text>
                 </Card.Body>
-                <Card.Footer className="d-flex justify-content-between">
-                    <small>
-                        On {localdate} @{localtime}
-                    </small>
+                <Card.Footer className="d-flex bg-white border-top-0 justify-content-between">
                     <span>
                         <Card.Link href="#">Retweet</Card.Link>
-                        <Card.Link href="#">Like</Card.Link>
+                        <Card.Link href="#">({likedBy.length})Like</Card.Link>
                     </span>
                 </Card.Footer>
             </Card>
