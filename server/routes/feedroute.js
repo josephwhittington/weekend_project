@@ -16,14 +16,14 @@ router.get("/:userid", (req, res) => {
     const [user] = users.filter(user => user.username === username);
     const following = user.following;
     // Filter all the tweets by tweets for tweets by people in the following list
+    tweets = tweets.map(tweet => ({
+        ...tweet,
+        displayName: users.filter(user => user.username === tweet.username)[0]
+            .displayName
+    }));
     const filteredTweets = tweets.filter(tweet =>
         following.includes(tweet.username)
     );
-    if (tweets && user && user.displayName) {
-        tweets = tweets.map(tweet => {
-            tweet.displayName = user.displayName;
-        });
-    }
     // Clip tweets to only inlucde 100
     if (filteredTweets.length > 100)
         filteredTweets = filteredTweets.slice(0, 101);
