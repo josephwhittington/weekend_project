@@ -17,9 +17,11 @@ export default class NavbarCustom extends Component {
         return (
             <div>
                 <Navbar bg="dark">
-                    <Link className="p-2 text-light" to="/">
-                        Home
-                    </Link>
+                    {!localStorage.getItem("token") && (
+                        <Link className="p-2 text-light" to="/">
+                            Home
+                        </Link>
+                    )}
                     {!localStorage.getItem("token") && (
                         <Link className="p-2 text-light" to="/register">
                             Register

@@ -7,6 +7,9 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
 
 export default class Home extends Component {
+    componentDidMount(props) {
+        localStorage.getItem("token") && this.props.history.push("/feed");
+    }
     render() {
         return (
             <div>
