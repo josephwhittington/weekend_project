@@ -31,10 +31,10 @@ export default class Feed extends Component {
         const tweets = this.state.tweets;
 
         return (
-            <div>
+            <div className="">
                 <Navbar push={this.props.history.push} />
                 <TweetEditor />
-                <div className="mt-3">
+                <div className="mt-3 px-2">
                     {tweets &&
                         tweets.map(tweet => (
                             <Tweet key={tweet.id} props={tweet}>

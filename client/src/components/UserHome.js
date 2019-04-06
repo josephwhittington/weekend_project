@@ -26,7 +26,7 @@ export default class UserHome extends Component {
             <div>
                 <Navbar push={this.props.history.push} />
                 <h3 className="my-3 text-center">@{userid}'s Tweets</h3>
-                <ul>
+                <ul className="py-0 px-2">
                     {tweets.map(tweet => (
                         <Tweet key={tweet.id} props={tweet} />
                     ))}

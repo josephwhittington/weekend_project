@@ -47,7 +47,10 @@ export default class Register extends Component {
             <div>
                 <Navbar push={this.props.history.push} />
                 <h1 className="py-5 text-center">Register for Dev Shout!!</h1>
-                <Form className="w-50 mx-auto" onSubmit={this.handleSubmit}>
+                <Form
+                    className="col-xs-12 col-md-8 col-lg-4 mx-auto"
+                    onSubmit={this.handleSubmit}
+                >
                     <Form.Group>
                         <Form.Label>
                             Display Name: <br />

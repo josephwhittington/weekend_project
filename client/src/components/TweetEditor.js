@@ -34,7 +34,7 @@ export default class TweetEditor extends Component {
     }
     render() {
         return (
-            <div className="w-50 mx-auto">
+            <div className="py-0 px-2 col-sm-10 col-lg-6 mx-auto">
                 <Form
                     className="mt-2 w-100 mx-auto"
                     onSubmit={this.handleSubmit}
@@ -42,7 +42,6 @@ export default class TweetEditor extends Component {
                     <Form.Control
                         as="textarea"
                         rows="2"
-                        cols="45"
                         style={{ resize: "none" }}
                         value={this.state.body}
                         onChange={this.handleChange}

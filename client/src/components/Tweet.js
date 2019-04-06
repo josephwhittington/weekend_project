@@ -27,7 +27,7 @@ export default class Tweet extends Component {
         if (media && typeof media === "string")
             media = `${setBaseURL()}/${media.split("\\")[2]}`;
         return (
-            <Card className="my-3 w-50 mx-auto">
+            <Card className="p-0 my-3 col-sm-10 col-md-8 col-lg-6 mx-auto">
                 <Card.Header className="bg-white border-light">
                     <div className="d-flex align-items-center">
                         <span

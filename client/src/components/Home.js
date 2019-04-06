@@ -20,13 +20,13 @@ export default class Home extends Component {
                         do the same. It's basically twitter but not as evil. Try
                         it out now!
                     </p>
-                    <p>
-                        <Button variant="success">
+                    <div className="d-flex justify-content-center justify-content-md-start justify-content-lg-start">
+                        <Button variant="success" className="d-block">
                             <Link className="text-light" to="/register">
                                 Sign Up Now
                             </Link>
                         </Button>
-                    </p>
+                    </div>
                 </Jumbotron>
             </div>
         );
