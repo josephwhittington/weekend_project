@@ -33,7 +33,9 @@ export default class Register extends Component {
         const { displayName, password, username } = this.state;
         console.log(this.state, " is state");
         const body = { displayName, password, username };
-        Axios.post("/user/create", body).then(data => console.log(data));
+        Axios.post("/user/create", body).then(data => {
+            data && this.props.history.push("/login");
+        });
         this.setState({
             displayName: "",
             password: "",
