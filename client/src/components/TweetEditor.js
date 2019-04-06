@@ -3,7 +3,6 @@ import Axios from "../utils/axios";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 
 export default class TweetEditor extends Component {
     constructor() {
