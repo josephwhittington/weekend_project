@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Axios from "../utils/axios";
 
 import Navbar from "./Navbar";
-
 import Tweet from "./Tweet";
+import UserAccount from "./UserAccount";
 
 export default class UserHome extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ export default class UserHome extends Component {
         return (
             <div>
                 <Navbar push={this.props.history.push} />
-                <h3 className="my-3 text-center">@{userid}'s Tweets</h3>
+                <UserAccount username={userid}/>
                 <ul className="py-0 px-2">
                     {tweets.map(tweet => (
                         <Tweet key={tweet.id} props={tweet} />
