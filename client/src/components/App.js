@@ -5,6 +5,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Feed from "./Feed";
 import UserHome from "./UserHome";
+import NotFound from "./NotFound";
 
 class App extends Component {
     render() {
@@ -12,10 +13,11 @@ class App extends Component {
             <div className="App">
                 <div id="main-section">
                     <Route path="/user/:userid" component={UserHome} />
-                    <Route exact path="/" component={Home} />
                     <Route exact path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <Route path="/feed" component={Feed} />
+                    <Route exact path="/" component={Home} />
+                    <Route component={NotFound} />
                 </div>
             </div>
         );
