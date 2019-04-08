@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./styles/UserAccount.css"
+
 import Button from "react-bootstrap/Button"
 
 export default class extends Component {
@@ -16,12 +18,10 @@ export default class extends Component {
                     }}
                 >
                 </div>
-                <div className="w-25 d-block mx-auto" style={{transform: "translate3d(0, -10vh, 0)"}}>
+                <div className="col-sm-6 col-lg-3 d-block mx-auto" style={{transform: "translate3d(0, -10vh, 0)"}}>
                     <div 
-                        className="mx-auto"
+                        className="profile mx-auto"
                         style={{
-                            height: "15vw", 
-                            width: "15vw", 
                             border: "1px solid lightgrey", 
                             backgroundImage: "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRamTDnUsC2ueFidJbKBssTtKdMxUuChb5M8AxqOICDeTd_n2Os)",
                             borderRadius: 500,
